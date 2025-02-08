@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { DB_NAME } from "../constants.js";
+import { DB_NAME } from "../constants.js";  // file extension is important
 
 const connectDB = async () => {
   try {
@@ -10,11 +10,22 @@ const connectDB = async () => {
       `\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`
     );
   } catch (error) {
-    console.error("MONGODB CONNECTION ERROR: ", error);
+    console.error("MONGODB CONNECTION FAILED: ", error);
     //throw error;
     process.exit(1);
   }
 };
+
+export default connectDB;
+
+
+
+
+
+
+
+
+
 /*
 const connectDB = () => {
   mongoose.connect(`${process.env.MONGO_URI}/${DB_NAME}`)
@@ -28,4 +39,4 @@ const connectDB = () => {
 };
 */
 
-export default connectDB;
+

@@ -1,14 +1,27 @@
-// require("dotenv").config({ path: "./env" });
+// require("dotenv").config({ path: "./env" }); //it will run perfectly
+import connectDB from "./db/db.js";  //! '/db.js' is important
+
 import dotenv from "dotenv";
-import connectDB from "./db/db.js";
 
+dotenv.config({ 
+    path: "../env" 
+});
 
-dotenv.config({ path: "../env" });
+connectDB()  //Returns a promise so we can use .then() and .catch() to handle success and failure respectively.
+.then(() =>{
+    app.on("error", (error) => {
+        console.log("ERRR: ", error);
+        throw error
+    })
 
-connectDB();
-
-
-
+    app.listen(process.env.PORT || 9000, () => {
+        console.log(`App is listening on port ${process.env.PORT}`);
+    })
+})
+.catch((err) =>{
+    console.log("MongoDB connection is failed ", err);
+    process.exit(1);
+});
 
 
 
@@ -27,7 +40,7 @@ const app = express()
 ( async () => {
     try {
         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
-        app.on("errror", (error) => {
+        app.on("error", (error) => {
             console.log("ERRR: ", error);
             throw error
         })
