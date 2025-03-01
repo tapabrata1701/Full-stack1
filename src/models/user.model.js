@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 import jwt from "jsonwebtoken";
-import Video from "./video.model";
+import {Video} from "./video.model.js";
 import bcrypt from "bcrypt";
 const userSchema = new Schema({
     username: {
